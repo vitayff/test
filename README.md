@@ -1,4 +1,4 @@
-# vuemysql
+# mysqlvue
 
 ## Project setup
 ```
