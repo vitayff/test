@@ -1,4 +1,4 @@
-# mysqlvue
+# vuefinally
 
 ## Project setup
 ```
