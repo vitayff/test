@@ -23,9 +23,12 @@
           type="primary"
           style="width: 100%;background: #505458;border: none"
           v-on:click="login"
-          >登录</el-button
-        >
+          >登录
+        </el-button>
       </el-form-item>
+      <p>
+        <router-link to="/register">没有账号？马上注册</router-link>
+      </p>
     </el-form>
   </div>
 </template>
@@ -52,6 +55,7 @@ export default {
         .then((successResponse) => {
           console.log(successResponse);
           if (successResponse.status === 200) {
+            console.log(sessionStorage.getItem("phone"));
             sessionStorage.setItem("phone", this.loginForm.phone);
             this.$router.replace({ path: "/index" });
           }

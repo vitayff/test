@@ -16,8 +16,8 @@
       type="primary"
       icon="el-icon-search"
       @click="searchClick"
-      >搜索</el-button
-    >
+      >搜索
+    </el-button>
   </div>
 </template>
 
