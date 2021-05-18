@@ -68,6 +68,7 @@ export default {
   },
   methods: {
     clear() {
+      this.ttime = [];
       this.form = {
         cust_id: "",
         cust_name: "",

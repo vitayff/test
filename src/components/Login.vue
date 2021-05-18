@@ -55,7 +55,6 @@ export default {
         .then((successResponse) => {
           console.log(successResponse);
           if (successResponse.status === 200) {
-            console.log(sessionStorage.getItem("phone"));
             sessionStorage.setItem("phone", this.loginForm.phone);
             this.$router.replace({ path: "/index" });
           }

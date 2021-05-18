@@ -1,7 +1,6 @@
 <template>
   <div>
-    <search-bar @onSearch="searchResult" ref="searchBar"></search-bar>
-    <el-row style="height: 740px;">
+    <el-row style="height: 740px; margin-top: 80px">
       <el-tooltip
         effect="dark"
         placement="right"
@@ -9,16 +8,15 @@
           (currentPage - 1) * pageSize,
           currentPage * pageSize
         )"
-        :key="item.room_id"
+        :key="item.roomId"
       >
         <template #content>
           <p style="font-size: 14px;margin-bottom: 6px;">
-            房间号：{{ item.room_id }}
+            房间号：{{ item.roomId }}
           </p>
           <p style="font-size: 13px;margin-bottom: 6px">
             <span>房间规格：{{ item.room_type }}</span> /
-            <span>房间价格：{{ item.price }}</span> /
-            <span>房间状态：{{ item.state }}</span>
+            <span>房间价格：{{ item.price }}</span>
           </p>
           <p style="width: 300px" class="abstract">
             房间大小：{{ item.size }}平方
@@ -28,13 +26,10 @@
           <div class="cover" @click="editBook(item)">
             <img :src="icon" alt="封面" />
           </div>
-          <div class="info">
-            <div class="title">
-              <a href="">{{ item.room_id }}</a>
-            </div>
-            <i class="el-icon-delete" @click="finishOrder(item.room_id)"></i>
+          <div>
+            <div class="title">{{ item.roomId }}</div>
+            <div class="author">{{ item.room_type }}</div>
           </div>
-          <div class="author">{{ item.room_type }}</div>
         </el-card>
       </el-tooltip>
       <edit-form @onSubmit="loadBooks()" ref="edit"></edit-form>
@@ -52,20 +47,19 @@
 </template>
 
 <script>
-import SearchBar from "@/components/room/SearchBar";
 import EditForm from "@/components/room/EditForm";
 
 export default {
   name: "Room",
-  components: { SearchBar, EditForm },
+  components: { EditForm },
   data() {
     return {
       icon: require("../../assets/yq.jpg"),
       books: [
         {
           cover: require("../../assets/yq.jpg"),
-          room_id: "三体",
-          room_type: "刘慈欣",
+          roomId: "加载中。。。。。。",
+          room_type: "加载中。。。。。。",
           price: "2019-05-05",
           state: "重庆出版社",
           size:
@@ -101,32 +95,10 @@ export default {
         }
       });
     },
-    finishOrder(id) {
-      this.$confirm("此操作将修改订单状态, 是否继续?", "提示", {
-        confirmButtonText: "取消订单",
-        cancelButtonText: "返回",
-        type: "warning",
-      })
-        .then(() => {
-          this.$axios
-            .post("/finishOrder", { cust_id: id, info: "取消" })
-            .then((resp) => {
-              if (resp && resp.status === 200) {
-                this.loadBooks();
-              }
-            });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消操作",
-          });
-        });
-    },
     editBook(item) {
       this.$refs.edit.dialogFormVisible = true;
       this.$refs.edit.form = {
-        room_id: item.room_id,
+        room_id: item.roomId,
       };
     },
   },
@@ -159,16 +131,19 @@ img {
 }
 
 .title {
+  font-weight: bold;
+  display: inline;
   font-size: 14px;
-  text-align: left;
+  float: left;
+  text-align: center;
 }
 
 .author {
-  color: #333;
-  width: 102px;
+  display: inline;
+  color: #409eff;
   font-size: 13px;
-  margin-bottom: 6px;
-  text-align: left;
+  float: right;
+  text-align: center;
 }
 
 .abstract {

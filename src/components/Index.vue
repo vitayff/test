@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav-menu></nav-menu>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
@@ -11,11 +11,9 @@ import NavMenu from "@/components/common/NavMenu";
 export default {
   name: "Index",
   components: {
-    NavMenu
-  }
-}
+    NavMenu,
+  },
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
