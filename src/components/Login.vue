@@ -59,8 +59,11 @@ export default {
             this.$router.replace({ path: "/index" });
           }
         })
-        .catch((failResponse) => {
-          console.log(failResponse);
+        .catch(() => {
+          this.$message({
+            type: "error",
+            message: "登录失败",
+          });
         });
     },
   },

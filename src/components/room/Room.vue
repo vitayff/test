@@ -1,5 +1,17 @@
 <template>
   <div>
+    <div>
+      <span class="chosetime">请选择入住时间段&nbsp;&nbsp;&nbsp; </span>
+      <el-date-picker
+        v-model="value1"
+        type="datetimerange"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        @change="chooseDays"
+      >
+      </el-date-picker>
+    </div>
     <el-row style="height: 740px; margin-top: 80px">
       <el-tooltip
         effect="dark"
@@ -48,13 +60,15 @@
 
 <script>
 import EditForm from "@/components/room/EditForm";
+import moment from "moment";
 
 export default {
   name: "Room",
   components: { EditForm },
   data() {
     return {
-      icon: require("../../assets/yq.jpg"),
+      value1: [],
+      icon: require("../../assets/77777.jpg"),
       books: [
         {
           cover: require("../../assets/yq.jpg"),
@@ -74,6 +88,19 @@ export default {
     this.loadBooks();
   },
   methods: {
+    chooseDays() {
+      const ttt = this;
+      this.$axios
+        .post("/selectday", {
+          enter_date: moment(ttt.value1[0]).format("YYYY-MM-DDTHH:mm:ss"),
+          leave_date: moment(ttt.value1[1]).format("YYYY-MM-DDTHH:mm:ss"),
+        })
+        .then((resp) => {
+          if (resp.status === 200) {
+            ttt.books = resp.data;
+          }
+        });
+    },
     loadBooks() {
       const _this = this;
       this.$axios.get("/getRooms").then((resp) => {
@@ -96,6 +123,7 @@ export default {
       });
     },
     editBook(item) {
+      this.$refs.edit.ttime = this.value1;
       this.$refs.edit.dialogFormVisible = true;
       this.$refs.edit.form = {
         room_id: item.roomId,
@@ -153,6 +181,10 @@ img {
 
 a {
   text-decoration: none;
+}
+.chosetime {
+  font-weight: bold;
+  color: #f56c6c;
 }
 
 a:link,

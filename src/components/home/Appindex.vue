@@ -1,7 +1,7 @@
 <template>
   <div id="poster">
     Hello World!
-    <router-link to="/room">
+    <router-link :to="state">
       <img class="fff" src="../../assets/yq.jpg" alt="null" />
     </router-link>
   </div>
@@ -10,6 +10,21 @@
 <script>
 export default {
   name: "Appindex",
+  data() {
+    return {
+      state: "",
+    };
+  },
+  mounted() {
+    this.routeIsAble();
+  },
+  methods: {
+    routeIsAble() {
+      const uu = sessionStorage.getItem("phone");
+      if (uu.startsWith("a")) this.state = "/manage";
+      else this.state = "/room";
+    },
+  },
 };
 </script>
 
@@ -22,6 +37,7 @@ export default {
   background-size: cover;
   position: fixed;
 }
+
 .fff {
   opacity: 0;
   display: inherit;

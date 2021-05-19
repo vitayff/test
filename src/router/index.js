@@ -7,11 +7,13 @@ import OrderIndex from "@/components/room/OrderIndex";
 import RoomIndex from "@/components/room/RoomIndex";
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+
 const routes = [
   {
     path: "/",
     name: "Home",
     component: Home,
+    redirect: "/index",
     meta: { auth: true },
   },
   {
@@ -58,7 +60,7 @@ const routes = [
         meta: { auth: true },
       },
       {
-        path: "manage",
+        path: "/manage",
         name: "Manage",
         component: ManageIndex,
         meta: { auth: true },

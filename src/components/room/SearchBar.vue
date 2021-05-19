@@ -4,7 +4,7 @@
   >
     <el-input
       @keyup.enter="searchClick"
-      placeholder="通过书名或作者搜索..."
+      placeholder="搜索身份证对应订单..."
       prefix-icon="el-icon-search"
       size="small"
       style="width: 400px;margin-right: 10px"
@@ -27,8 +27,6 @@ export default {
   data() {
     return {
       keywords: "",
-      books: [],
-      cardLoading: [],
     };
   },
   methods: {

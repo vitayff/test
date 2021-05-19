@@ -102,7 +102,7 @@ export default {
       console.log(this.currentPage);
     },
     finishOrder(id) {
-      this.$confirm("此操作将修改订单状态, 是否继续?", "提示", {
+      this.$confirm("此操作将取消订单, 是否继续?", "提示", {
         confirmButtonText: "取消订单",
         cancelButtonText: "返回",
         type: "warning",

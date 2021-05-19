@@ -59,7 +59,7 @@ export default {
           }
         })
         .catch(() => {
-          ElMessage.info("注册失败");
+          ElMessage.info("用户名已存在");
         });
     };
     return {

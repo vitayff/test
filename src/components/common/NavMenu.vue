@@ -38,9 +38,9 @@ export default {
       able: [false, true, false, false],
       navList: [
         { name: "/index", navItem: "首页" },
-        { name: "/jotter", navItem: "管理" },
+        { name: "/manage", navItem: "管理" },
         { name: "/room", navItem: "房间预定" },
-        { name: "/admin", navItem: "个人中心" },
+        { name: "/about", navItem: "关于" },
       ],
     };
   },
@@ -51,8 +51,10 @@ export default {
     btnIsAble() {
       const uu = sessionStorage.getItem("phone");
       this.able[1] = !uu.startsWith("a");
+      this.able[2] = uu.startsWith("a");
     },
     logout() {
+      sessionStorage.clear();
       this.$axios.get("/logout").then((resp) => {
         if (resp.status === 200) {
           // 前后端状态保持一致
