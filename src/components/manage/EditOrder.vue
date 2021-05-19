@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog title="新建订单" v-model="dialogFormVisible" @close="clear">
+    <el-dialog title="修改订单" v-model="dialogFormVisible" @close="clear">
       <el-form v-model="form" style="text-align: left" ref="dataForm">
         <el-form-item label="订单号" :label-width="formLabelWidth">
           <el-tag type="success">{{ form.id }}</el-tag>
