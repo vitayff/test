@@ -13,7 +13,7 @@
           style="margin: 0 auto;float: left"
         >
           <el-col>
-            <el-card style="width: 1500px">
+            <el-card style="width: 1500px" @click="editO(item)">
               <el-descriptions title="订单信息">
                 <el-descriptions-item label="订单名"
                   >{{ item.id }}
@@ -68,6 +68,7 @@
           </el-col>
         </div>
       </el-row>
+      <edit-order @submit="getAllRooms" ref="updateR"></edit-order>
 
       <el-row class="vvv">
         <el-pagination
@@ -85,11 +86,13 @@
 <script>
 import SearchBar from "@/components/room/SearchBar";
 import moment from "moment";
+import EditOrder from "@/components/manage/EditOrder";
 
 export default {
   name: "ManageIndex",
   components: {
     SearchBar,
+    EditOrder,
   },
   data() {
     return {
@@ -111,8 +114,20 @@ export default {
     this.getAllRooms();
   },
   methods: {
+    editO(item) {
+      this.$refs.updateR.ttime = [
+        moment(item.enterDate),
+        moment(item.leaveDate),
+      ];
+      this.$refs.updateR.dialogFormVisible = true;
+      this.$refs.updateR.form = {
+        id: item.id,
+        rid: item.rid.roomId,
+        state: item.state,
+      };
+    },
     ifOk(dd) {
-      return dd === "已预订";
+      return dd === "已预订" || dd === "已入住";
     },
     compute(a, b) {
       const bb = moment(b);
